@@ -26,9 +26,12 @@ void Server::start() {
 		// One or more descriptors are readable. Need to determine which ones they are.
 		for (pollfds_iterator it = _pollfds.begin(); it != _pollfds.end(); it++) {
 
+			//nothing happened
 			if (it->revents == 0)
 				continue;
 
+			//disconnect
+			//if (it->revents == POLLHUP) {
 			if ((it->revents & POLLHUP) == POLLHUP) {
 				onClientDisconnect(it->fd);
 				break;
@@ -36,11 +39,12 @@ void Server::start() {
 
 			if ((it->revents & POLLIN) == POLLIN) {
 
+				//connect
 				if (it->fd == _sock) {
 					onClientConnect();
 					break;
 				}
-
+				//got message
 				onClientMessage(it->fd);
 			}
 		}
