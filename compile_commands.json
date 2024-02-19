@@ -1,116 +1,97 @@
 [
 {
-  "directory": "/Users/gwagdong-u/irc",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/gwagdong-u/irc/include -I/Users/gwagdong-u/irc/include/network -I/Users/gwagdong-u/irc/include/commands -std=gnu++98 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -o CMakeFiles/ft_irc.dir/src/main.cpp.o -c /Users/gwagdong-u/irc/src/main.cpp",
-  "file": "/Users/gwagdong-u/irc/src/main.cpp",
-  "output": "CMakeFiles/ft_irc.dir/src/main.cpp.o"
+  "directory": "/home/dongwoo_kwak_ck1_3/irc_server/build",
+  "command": "/usr/bin/c++   -I/home/dongwoo_kwak_ck1_3/irc_server/include -I/home/dongwoo_kwak_ck1_3/irc_server/include/network -I/home/dongwoo_kwak_ck1_3/irc_server/include/commands    -std=gnu++98 -o CMakeFiles/ircserv.dir/src/main.cpp.o -c /home/dongwoo_kwak_ck1_3/irc_server/src/main.cpp",
+  "file": "/home/dongwoo_kwak_ck1_3/irc_server/src/main.cpp"
 },
 {
-  "directory": "/Users/gwagdong-u/irc",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/gwagdong-u/irc/include -I/Users/gwagdong-u/irc/include/network -I/Users/gwagdong-u/irc/include/commands -std=gnu++98 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -o CMakeFiles/ft_irc.dir/src/network/Server.cpp.o -c /Users/gwagdong-u/irc/src/network/Server.cpp",
-  "file": "/Users/gwagdong-u/irc/src/network/Server.cpp",
-  "output": "CMakeFiles/ft_irc.dir/src/network/Server.cpp.o"
+  "directory": "/home/dongwoo_kwak_ck1_3/irc_server/build",
+  "command": "/usr/bin/c++   -I/home/dongwoo_kwak_ck1_3/irc_server/include -I/home/dongwoo_kwak_ck1_3/irc_server/include/network -I/home/dongwoo_kwak_ck1_3/irc_server/include/commands    -std=gnu++98 -o CMakeFiles/ircserv.dir/src/network/Server.cpp.o -c /home/dongwoo_kwak_ck1_3/irc_server/src/network/Server.cpp",
+  "file": "/home/dongwoo_kwak_ck1_3/irc_server/src/network/Server.cpp"
 },
 {
-  "directory": "/Users/gwagdong-u/irc",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/gwagdong-u/irc/include -I/Users/gwagdong-u/irc/include/network -I/Users/gwagdong-u/irc/include/commands -std=gnu++98 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -o CMakeFiles/ft_irc.dir/src/network/Client.cpp.o -c /Users/gwagdong-u/irc/src/network/Client.cpp",
-  "file": "/Users/gwagdong-u/irc/src/network/Client.cpp",
-  "output": "CMakeFiles/ft_irc.dir/src/network/Client.cpp.o"
+  "directory": "/home/dongwoo_kwak_ck1_3/irc_server/build",
+  "command": "/usr/bin/c++   -I/home/dongwoo_kwak_ck1_3/irc_server/include -I/home/dongwoo_kwak_ck1_3/irc_server/include/network -I/home/dongwoo_kwak_ck1_3/irc_server/include/commands    -std=gnu++98 -o CMakeFiles/ircserv.dir/src/network/Client.cpp.o -c /home/dongwoo_kwak_ck1_3/irc_server/src/network/Client.cpp",
+  "file": "/home/dongwoo_kwak_ck1_3/irc_server/src/network/Client.cpp"
 },
 {
-  "directory": "/Users/gwagdong-u/irc",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/gwagdong-u/irc/include -I/Users/gwagdong-u/irc/include/network -I/Users/gwagdong-u/irc/include/commands -std=gnu++98 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -o CMakeFiles/ft_irc.dir/src/network/Channel.cpp.o -c /Users/gwagdong-u/irc/src/network/Channel.cpp",
-  "file": "/Users/gwagdong-u/irc/src/network/Channel.cpp",
-  "output": "CMakeFiles/ft_irc.dir/src/network/Channel.cpp.o"
+  "directory": "/home/dongwoo_kwak_ck1_3/irc_server/build",
+  "command": "/usr/bin/c++   -I/home/dongwoo_kwak_ck1_3/irc_server/include -I/home/dongwoo_kwak_ck1_3/irc_server/include/network -I/home/dongwoo_kwak_ck1_3/irc_server/include/commands    -std=gnu++98 -o CMakeFiles/ircserv.dir/src/network/Channel.cpp.o -c /home/dongwoo_kwak_ck1_3/irc_server/src/network/Channel.cpp",
+  "file": "/home/dongwoo_kwak_ck1_3/irc_server/src/network/Channel.cpp"
 },
 {
-  "directory": "/Users/gwagdong-u/irc",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/gwagdong-u/irc/include -I/Users/gwagdong-u/irc/include/network -I/Users/gwagdong-u/irc/include/commands -std=gnu++98 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -o CMakeFiles/ft_irc.dir/src/commands/CommandHandler.cpp.o -c /Users/gwagdong-u/irc/src/commands/CommandHandler.cpp",
-  "file": "/Users/gwagdong-u/irc/src/commands/CommandHandler.cpp",
-  "output": "CMakeFiles/ft_irc.dir/src/commands/CommandHandler.cpp.o"
+  "directory": "/home/dongwoo_kwak_ck1_3/irc_server/build",
+  "command": "/usr/bin/c++   -I/home/dongwoo_kwak_ck1_3/irc_server/include -I/home/dongwoo_kwak_ck1_3/irc_server/include/network -I/home/dongwoo_kwak_ck1_3/irc_server/include/commands    -std=gnu++98 -o CMakeFiles/ircserv.dir/src/commands/CommandHandler.cpp.o -c /home/dongwoo_kwak_ck1_3/irc_server/src/commands/CommandHandler.cpp",
+  "file": "/home/dongwoo_kwak_ck1_3/irc_server/src/commands/CommandHandler.cpp"
 },
 {
-  "directory": "/Users/gwagdong-u/irc",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/gwagdong-u/irc/include -I/Users/gwagdong-u/irc/include/network -I/Users/gwagdong-u/irc/include/commands -std=gnu++98 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -o CMakeFiles/ft_irc.dir/src/commands/impl/NickCommand.cpp.o -c /Users/gwagdong-u/irc/src/commands/impl/NickCommand.cpp",
-  "file": "/Users/gwagdong-u/irc/src/commands/impl/NickCommand.cpp",
-  "output": "CMakeFiles/ft_irc.dir/src/commands/impl/NickCommand.cpp.o"
+  "directory": "/home/dongwoo_kwak_ck1_3/irc_server/build",
+  "command": "/usr/bin/c++   -I/home/dongwoo_kwak_ck1_3/irc_server/include -I/home/dongwoo_kwak_ck1_3/irc_server/include/network -I/home/dongwoo_kwak_ck1_3/irc_server/include/commands    -std=gnu++98 -o CMakeFiles/ircserv.dir/src/commands/impl/NickCommand.cpp.o -c /home/dongwoo_kwak_ck1_3/irc_server/src/commands/impl/NickCommand.cpp",
+  "file": "/home/dongwoo_kwak_ck1_3/irc_server/src/commands/impl/NickCommand.cpp"
 },
 {
-  "directory": "/Users/gwagdong-u/irc",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/gwagdong-u/irc/include -I/Users/gwagdong-u/irc/include/network -I/Users/gwagdong-u/irc/include/commands -std=gnu++98 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -o CMakeFiles/ft_irc.dir/src/commands/impl/PassCommand.cpp.o -c /Users/gwagdong-u/irc/src/commands/impl/PassCommand.cpp",
-  "file": "/Users/gwagdong-u/irc/src/commands/impl/PassCommand.cpp",
-  "output": "CMakeFiles/ft_irc.dir/src/commands/impl/PassCommand.cpp.o"
+  "directory": "/home/dongwoo_kwak_ck1_3/irc_server/build",
+  "command": "/usr/bin/c++   -I/home/dongwoo_kwak_ck1_3/irc_server/include -I/home/dongwoo_kwak_ck1_3/irc_server/include/network -I/home/dongwoo_kwak_ck1_3/irc_server/include/commands    -std=gnu++98 -o CMakeFiles/ircserv.dir/src/commands/impl/PassCommand.cpp.o -c /home/dongwoo_kwak_ck1_3/irc_server/src/commands/impl/PassCommand.cpp",
+  "file": "/home/dongwoo_kwak_ck1_3/irc_server/src/commands/impl/PassCommand.cpp"
 },
 {
-  "directory": "/Users/gwagdong-u/irc",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/gwagdong-u/irc/include -I/Users/gwagdong-u/irc/include/network -I/Users/gwagdong-u/irc/include/commands -std=gnu++98 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -o CMakeFiles/ft_irc.dir/src/commands/impl/UserCommand.cpp.o -c /Users/gwagdong-u/irc/src/commands/impl/UserCommand.cpp",
-  "file": "/Users/gwagdong-u/irc/src/commands/impl/UserCommand.cpp",
-  "output": "CMakeFiles/ft_irc.dir/src/commands/impl/UserCommand.cpp.o"
+  "directory": "/home/dongwoo_kwak_ck1_3/irc_server/build",
+  "command": "/usr/bin/c++   -I/home/dongwoo_kwak_ck1_3/irc_server/include -I/home/dongwoo_kwak_ck1_3/irc_server/include/network -I/home/dongwoo_kwak_ck1_3/irc_server/include/commands    -std=gnu++98 -o CMakeFiles/ircserv.dir/src/commands/impl/UserCommand.cpp.o -c /home/dongwoo_kwak_ck1_3/irc_server/src/commands/impl/UserCommand.cpp",
+  "file": "/home/dongwoo_kwak_ck1_3/irc_server/src/commands/impl/UserCommand.cpp"
 },
 {
-  "directory": "/Users/gwagdong-u/irc",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/gwagdong-u/irc/include -I/Users/gwagdong-u/irc/include/network -I/Users/gwagdong-u/irc/include/commands -std=gnu++98 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -o CMakeFiles/ft_irc.dir/src/commands/impl/JoinCommand.cpp.o -c /Users/gwagdong-u/irc/src/commands/impl/JoinCommand.cpp",
-  "file": "/Users/gwagdong-u/irc/src/commands/impl/JoinCommand.cpp",
-  "output": "CMakeFiles/ft_irc.dir/src/commands/impl/JoinCommand.cpp.o"
+  "directory": "/home/dongwoo_kwak_ck1_3/irc_server/build",
+  "command": "/usr/bin/c++   -I/home/dongwoo_kwak_ck1_3/irc_server/include -I/home/dongwoo_kwak_ck1_3/irc_server/include/network -I/home/dongwoo_kwak_ck1_3/irc_server/include/commands    -std=gnu++98 -o CMakeFiles/ircserv.dir/src/commands/impl/JoinCommand.cpp.o -c /home/dongwoo_kwak_ck1_3/irc_server/src/commands/impl/JoinCommand.cpp",
+  "file": "/home/dongwoo_kwak_ck1_3/irc_server/src/commands/impl/JoinCommand.cpp"
 },
 {
-  "directory": "/Users/gwagdong-u/irc",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/gwagdong-u/irc/include -I/Users/gwagdong-u/irc/include/network -I/Users/gwagdong-u/irc/include/commands -std=gnu++98 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -o CMakeFiles/ft_irc.dir/src/commands/impl/QuitCommand.cpp.o -c /Users/gwagdong-u/irc/src/commands/impl/QuitCommand.cpp",
-  "file": "/Users/gwagdong-u/irc/src/commands/impl/QuitCommand.cpp",
-  "output": "CMakeFiles/ft_irc.dir/src/commands/impl/QuitCommand.cpp.o"
+  "directory": "/home/dongwoo_kwak_ck1_3/irc_server/build",
+  "command": "/usr/bin/c++   -I/home/dongwoo_kwak_ck1_3/irc_server/include -I/home/dongwoo_kwak_ck1_3/irc_server/include/network -I/home/dongwoo_kwak_ck1_3/irc_server/include/commands    -std=gnu++98 -o CMakeFiles/ircserv.dir/src/commands/impl/QuitCommand.cpp.o -c /home/dongwoo_kwak_ck1_3/irc_server/src/commands/impl/QuitCommand.cpp",
+  "file": "/home/dongwoo_kwak_ck1_3/irc_server/src/commands/impl/QuitCommand.cpp"
 },
 {
-  "directory": "/Users/gwagdong-u/irc",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/gwagdong-u/irc/include -I/Users/gwagdong-u/irc/include/network -I/Users/gwagdong-u/irc/include/commands -std=gnu++98 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -o CMakeFiles/ft_irc.dir/src/commands/impl/PartCommand.cpp.o -c /Users/gwagdong-u/irc/src/commands/impl/PartCommand.cpp",
-  "file": "/Users/gwagdong-u/irc/src/commands/impl/PartCommand.cpp",
-  "output": "CMakeFiles/ft_irc.dir/src/commands/impl/PartCommand.cpp.o"
+  "directory": "/home/dongwoo_kwak_ck1_3/irc_server/build",
+  "command": "/usr/bin/c++   -I/home/dongwoo_kwak_ck1_3/irc_server/include -I/home/dongwoo_kwak_ck1_3/irc_server/include/network -I/home/dongwoo_kwak_ck1_3/irc_server/include/commands    -std=gnu++98 -o CMakeFiles/ircserv.dir/src/commands/impl/PartCommand.cpp.o -c /home/dongwoo_kwak_ck1_3/irc_server/src/commands/impl/PartCommand.cpp",
+  "file": "/home/dongwoo_kwak_ck1_3/irc_server/src/commands/impl/PartCommand.cpp"
 },
 {
-  "directory": "/Users/gwagdong-u/irc",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/gwagdong-u/irc/include -I/Users/gwagdong-u/irc/include/network -I/Users/gwagdong-u/irc/include/commands -std=gnu++98 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -o CMakeFiles/ft_irc.dir/src/commands/impl/PrivMsgCommand.cpp.o -c /Users/gwagdong-u/irc/src/commands/impl/PrivMsgCommand.cpp",
-  "file": "/Users/gwagdong-u/irc/src/commands/impl/PrivMsgCommand.cpp",
-  "output": "CMakeFiles/ft_irc.dir/src/commands/impl/PrivMsgCommand.cpp.o"
+  "directory": "/home/dongwoo_kwak_ck1_3/irc_server/build",
+  "command": "/usr/bin/c++   -I/home/dongwoo_kwak_ck1_3/irc_server/include -I/home/dongwoo_kwak_ck1_3/irc_server/include/network -I/home/dongwoo_kwak_ck1_3/irc_server/include/commands    -std=gnu++98 -o CMakeFiles/ircserv.dir/src/commands/impl/PrivMsgCommand.cpp.o -c /home/dongwoo_kwak_ck1_3/irc_server/src/commands/impl/PrivMsgCommand.cpp",
+  "file": "/home/dongwoo_kwak_ck1_3/irc_server/src/commands/impl/PrivMsgCommand.cpp"
 },
 {
-  "directory": "/Users/gwagdong-u/irc",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/gwagdong-u/irc/include -I/Users/gwagdong-u/irc/include/network -I/Users/gwagdong-u/irc/include/commands -std=gnu++98 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -o CMakeFiles/ft_irc.dir/src/commands/impl/KickCommand.cpp.o -c /Users/gwagdong-u/irc/src/commands/impl/KickCommand.cpp",
-  "file": "/Users/gwagdong-u/irc/src/commands/impl/KickCommand.cpp",
-  "output": "CMakeFiles/ft_irc.dir/src/commands/impl/KickCommand.cpp.o"
+  "directory": "/home/dongwoo_kwak_ck1_3/irc_server/build",
+  "command": "/usr/bin/c++   -I/home/dongwoo_kwak_ck1_3/irc_server/include -I/home/dongwoo_kwak_ck1_3/irc_server/include/network -I/home/dongwoo_kwak_ck1_3/irc_server/include/commands    -std=gnu++98 -o CMakeFiles/ircserv.dir/src/commands/impl/KickCommand.cpp.o -c /home/dongwoo_kwak_ck1_3/irc_server/src/commands/impl/KickCommand.cpp",
+  "file": "/home/dongwoo_kwak_ck1_3/irc_server/src/commands/impl/KickCommand.cpp"
 },
 {
-  "directory": "/Users/gwagdong-u/irc",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/gwagdong-u/irc/include -I/Users/gwagdong-u/irc/include/network -I/Users/gwagdong-u/irc/include/commands -std=gnu++98 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -o CMakeFiles/ft_irc.dir/src/commands/impl/PingCommand.cpp.o -c /Users/gwagdong-u/irc/src/commands/impl/PingCommand.cpp",
-  "file": "/Users/gwagdong-u/irc/src/commands/impl/PingCommand.cpp",
-  "output": "CMakeFiles/ft_irc.dir/src/commands/impl/PingCommand.cpp.o"
+  "directory": "/home/dongwoo_kwak_ck1_3/irc_server/build",
+  "command": "/usr/bin/c++   -I/home/dongwoo_kwak_ck1_3/irc_server/include -I/home/dongwoo_kwak_ck1_3/irc_server/include/network -I/home/dongwoo_kwak_ck1_3/irc_server/include/commands    -std=gnu++98 -o CMakeFiles/ircserv.dir/src/commands/impl/PingCommand.cpp.o -c /home/dongwoo_kwak_ck1_3/irc_server/src/commands/impl/PingCommand.cpp",
+  "file": "/home/dongwoo_kwak_ck1_3/irc_server/src/commands/impl/PingCommand.cpp"
 },
 {
-  "directory": "/Users/gwagdong-u/irc",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/gwagdong-u/irc/include -I/Users/gwagdong-u/irc/include/network -I/Users/gwagdong-u/irc/include/commands -std=gnu++98 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -o CMakeFiles/ft_irc.dir/src/commands/impl/PongCommand.cpp.o -c /Users/gwagdong-u/irc/src/commands/impl/PongCommand.cpp",
-  "file": "/Users/gwagdong-u/irc/src/commands/impl/PongCommand.cpp",
-  "output": "CMakeFiles/ft_irc.dir/src/commands/impl/PongCommand.cpp.o"
+  "directory": "/home/dongwoo_kwak_ck1_3/irc_server/build",
+  "command": "/usr/bin/c++   -I/home/dongwoo_kwak_ck1_3/irc_server/include -I/home/dongwoo_kwak_ck1_3/irc_server/include/network -I/home/dongwoo_kwak_ck1_3/irc_server/include/commands    -std=gnu++98 -o CMakeFiles/ircserv.dir/src/commands/impl/PongCommand.cpp.o -c /home/dongwoo_kwak_ck1_3/irc_server/src/commands/impl/PongCommand.cpp",
+  "file": "/home/dongwoo_kwak_ck1_3/irc_server/src/commands/impl/PongCommand.cpp"
 },
 {
-  "directory": "/Users/gwagdong-u/irc",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/gwagdong-u/irc/include -I/Users/gwagdong-u/irc/include/network -I/Users/gwagdong-u/irc/include/commands -std=gnu++98 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -o CMakeFiles/ft_irc.dir/src/commands/impl/NoticeCommand.cpp.o -c /Users/gwagdong-u/irc/src/commands/impl/NoticeCommand.cpp",
-  "file": "/Users/gwagdong-u/irc/src/commands/impl/NoticeCommand.cpp",
-  "output": "CMakeFiles/ft_irc.dir/src/commands/impl/NoticeCommand.cpp.o"
+  "directory": "/home/dongwoo_kwak_ck1_3/irc_server/build",
+  "command": "/usr/bin/c++   -I/home/dongwoo_kwak_ck1_3/irc_server/include -I/home/dongwoo_kwak_ck1_3/irc_server/include/network -I/home/dongwoo_kwak_ck1_3/irc_server/include/commands    -std=gnu++98 -o CMakeFiles/ircserv.dir/src/commands/impl/NoticeCommand.cpp.o -c /home/dongwoo_kwak_ck1_3/irc_server/src/commands/impl/NoticeCommand.cpp",
+  "file": "/home/dongwoo_kwak_ck1_3/irc_server/src/commands/impl/NoticeCommand.cpp"
 },
 {
-  "directory": "/Users/gwagdong-u/irc",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/gwagdong-u/irc/include -I/Users/gwagdong-u/irc/include/network -I/Users/gwagdong-u/irc/include/commands -std=gnu++98 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -o CMakeFiles/ft_irc.dir/src/commands/impl/ModeCommand.cpp.o -c /Users/gwagdong-u/irc/src/commands/impl/ModeCommand.cpp",
-  "file": "/Users/gwagdong-u/irc/src/commands/impl/ModeCommand.cpp",
-  "output": "CMakeFiles/ft_irc.dir/src/commands/impl/ModeCommand.cpp.o"
+  "directory": "/home/dongwoo_kwak_ck1_3/irc_server/build",
+  "command": "/usr/bin/c++   -I/home/dongwoo_kwak_ck1_3/irc_server/include -I/home/dongwoo_kwak_ck1_3/irc_server/include/network -I/home/dongwoo_kwak_ck1_3/irc_server/include/commands    -std=gnu++98 -o CMakeFiles/ircserv.dir/src/commands/impl/ModeCommand.cpp.o -c /home/dongwoo_kwak_ck1_3/irc_server/src/commands/impl/ModeCommand.cpp",
+  "file": "/home/dongwoo_kwak_ck1_3/irc_server/src/commands/impl/ModeCommand.cpp"
 },
 {
-  "directory": "/Users/gwagdong-u/irc",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/gwagdong-u/irc/include -I/Users/gwagdong-u/irc/include/network -I/Users/gwagdong-u/irc/include/commands -std=gnu++98 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -o CMakeFiles/ft_irc.dir/src/commands/impl/TopicCommand.cpp.o -c /Users/gwagdong-u/irc/src/commands/impl/TopicCommand.cpp",
-  "file": "/Users/gwagdong-u/irc/src/commands/impl/TopicCommand.cpp",
-  "output": "CMakeFiles/ft_irc.dir/src/commands/impl/TopicCommand.cpp.o"
+  "directory": "/home/dongwoo_kwak_ck1_3/irc_server/build",
+  "command": "/usr/bin/c++   -I/home/dongwoo_kwak_ck1_3/irc_server/include -I/home/dongwoo_kwak_ck1_3/irc_server/include/network -I/home/dongwoo_kwak_ck1_3/irc_server/include/commands    -std=gnu++98 -o CMakeFiles/ircserv.dir/src/commands/impl/TopicCommand.cpp.o -c /home/dongwoo_kwak_ck1_3/irc_server/src/commands/impl/TopicCommand.cpp",
+  "file": "/home/dongwoo_kwak_ck1_3/irc_server/src/commands/impl/TopicCommand.cpp"
 },
 {
-  "directory": "/Users/gwagdong-u/irc",
-  "command": "/Library/Developer/CommandLineTools/usr/bin/c++  -I/Users/gwagdong-u/irc/include -I/Users/gwagdong-u/irc/include/network -I/Users/gwagdong-u/irc/include/commands -std=gnu++98 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.7 -o CMakeFiles/ft_irc.dir/src/commands/impl/InviteCommand.cpp.o -c /Users/gwagdong-u/irc/src/commands/impl/InviteCommand.cpp",
-  "file": "/Users/gwagdong-u/irc/src/commands/impl/InviteCommand.cpp",
-  "output": "CMakeFiles/ft_irc.dir/src/commands/impl/InviteCommand.cpp.o"
+  "directory": "/home/dongwoo_kwak_ck1_3/irc_server/build",
+  "command": "/usr/bin/c++   -I/home/dongwoo_kwak_ck1_3/irc_server/include -I/home/dongwoo_kwak_ck1_3/irc_server/include/network -I/home/dongwoo_kwak_ck1_3/irc_server/include/commands    -std=gnu++98 -o CMakeFiles/ircserv.dir/src/commands/impl/InviteCommand.cpp.o -c /home/dongwoo_kwak_ck1_3/irc_server/src/commands/impl/InviteCommand.cpp",
+  "file": "/home/dongwoo_kwak_ck1_3/irc_server/src/commands/impl/InviteCommand.cpp"
 }
 ]

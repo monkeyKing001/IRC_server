@@ -1,3 +1,0 @@
-/Users/gwagdong-u/irc/CMakeFiles/ft_irc.dir
-/Users/gwagdong-u/irc/CMakeFiles/edit_cache.dir
-/Users/gwagdong-u/irc/CMakeFiles/rebuild_cache.dir

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.16)
 project(ft_irc)
 set(CMAKE_CXX_STANDARD 98)
 
@@ -26,4 +26,6 @@ set(SOURCES
 		src/commands/impl/TopicCommand.cpp
 		src/commands/impl/InviteCommand.cpp)
 
-add_executable(ft_irc src/main.cpp ${SOURCES})
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+add_executable(ircserv src/main.cpp ${SOURCES})
