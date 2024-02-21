@@ -1,4 +1,5 @@
 #include "network/Server.hpp"
+#include <sys/epoll.h>
 
 Server::Server(const std::string &port, const std::string &password)
 		: _running(1), _host("127.0.0.1"), _port(port), _password(password) {
@@ -12,10 +13,11 @@ Server::~Server() {
 }
 
 void Server::start() {
-	pollfd server_fd = {_sock, POLLIN, 0};
+	pollfd server_fd = {_sock, POLLIN, 0}; //fd, watching events, return events
 	_pollfds.push_back(server_fd);
 
 	ft_log("Server listening...");
+
 
 	while (_running) {
 
@@ -37,6 +39,7 @@ void Server::start() {
 				break;
 			}
 
+			//data in read buffer.
 			if ((it->revents & POLLIN) == POLLIN) {
 
 				//connect
@@ -54,12 +57,17 @@ void Server::start() {
 
 int Server::newSocket() {
 
+	if ((_epollfd = epoll_create(1)) == -1)
+		throw std::runtime_error("Error while opening epoll fd");
+
 	int sockfd = socket(AF_INET, SOCK_STREAM, 0);
 	if (sockfd < 0)
 		throw std::runtime_error("Error while opening socket.");
 
 	// Forcefully attaching socket to the port
 	int val = 1;
+	//SO_REUSEADDR -> optiized address diospension policy for frequent conn/disconn sockets.
+	//SOLSOCKET -> SOCKET_LEVEL option manipulations.
 	if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &val, sizeof(val)))
 		throw std::runtime_error("Error while setting socket options.");
 
@@ -81,7 +89,7 @@ int Server::newSocket() {
 	 * htons() convert unsigned short int to big-endian network byte order as expected from TCP protocol standards
 	 */
 	serv_address.sin_family = AF_INET;
-	serv_address.sin_addr.s_addr = INADDR_ANY;
+	serv_address.sin_addr.s_addr = INADDR_ANY; //all address of local host
 	//serv_address.sin_port = htons(std::stoi(_port));
 	serv_address.sin_port = htons(atoi(_port.c_str())); // !!! _port == 123abc (?)
 
@@ -89,9 +97,14 @@ int Server::newSocket() {
 	if (bind(sockfd, (struct sockaddr *) &serv_address, sizeof(serv_address)) < 0)
 		throw std::runtime_error("Error while binding socket.");
 
-	// Let socket be able to listen for requests
+	// Let socket be able to listen for requests, and backlog connection waiting queue
 	if (listen(sockfd, MAX_CONNECTIONS) < 0)
 		throw std::runtime_error("Error while listening on socket.");
+
+	//static size
+	if ((_ev = (epoll_event *)calloc(1024, sizeof(struct epoll_event))) == NULL)
+		throw std::runtime_error("Error while creating epoll event struct.");
+	addEvent(_sock);
 	return sockfd;
 }
 
@@ -169,6 +182,8 @@ void Server::onClientConnect() {
 	//char message[1000];
 	//sprintf(message, "%s:%d has connected.", client->getHostname().c_str(), client->getPort());
 	ft_log(makeLogMessage(client->getHostname(), client->getPort()));
+	//epoll
+	addEvent(fd);
 }
 
 void Server::onClientDisconnect(int fd) {
@@ -181,8 +196,10 @@ void Server::onClientDisconnect(int fd) {
 		//char message[1000];
 		//sprintf(message, "%s:%d has disconnected.", client->getHostname().c_str(), client->getPort());
 		ft_log(makeDisconnectLogMessage(client->getHostname(), client->getPort()));
-
 		_clients.erase(fd);
+
+		//epoll
+		delEvent(fd);
 
 		for (pollfds_iterator it = _pollfds.begin(); it != _pollfds.end(); it++) {
 			if (it->fd != fd)
@@ -239,4 +256,20 @@ Channel *Server::createChannel(const std::string &name, const std::string &passw
 	channel->setInvitemode(false); // sungjuki
 
 	return channel;
+}
+
+int Server::addEvent(int fd){
+	struct epoll_event newEv;
+	newEv.events = EPOLLIN | EPOLLPRI;
+	newEv.data.fd = fd;
+	if (epoll_ctl(_epollfd, EPOLL_CTL_ADD, fd, &newEv) == -1)
+		return (-1);
+	return (0);
+}
+
+int Server::delEvent(int fd){
+	if (epoll_ctl(_epollfd, EPOLL_CTL_ADD, fd, NULL) == -1)
+		return (-1);
+	close(fd);
+	return (0);
 }

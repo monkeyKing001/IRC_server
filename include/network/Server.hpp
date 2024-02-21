@@ -15,6 +15,7 @@ class Server;
 #include <unistd.h>
 #include <stdlib.h>
 #include <errno.h>
+#include <sys/epoll.h>
 
 #include "commands/CommandHandler.hpp"
 #include "Client.hpp"
@@ -29,11 +30,15 @@ class Server
 	typedef std::vector<Channel *>::iterator channels_iterator;
 
 	int							_running;
-	int							_sock;
+	int							_sock; //listener socket
 	const std::string			_host;
 	const std::string			_port;
 	const std::string			_password;
 	std::vector<pollfd>			_pollfds;
+	int 						_epollfd;
+	struct epoll_event *		_ev;
+	std::vector<epoll_event>    _evs;
+	
 	std::map<int, Client *>		_clients;
 	std::vector<Channel *>		_channels;
 	CommandHandler*				_commandHandler;
@@ -56,6 +61,9 @@ public:
 	void onClientMessage(int fd);
 	int	 readMessage(int fd);
 	const std::string getServername() { return this->_host; }; //sungjuki
+															   
+	int addEvent(int fd);
+	int delEvent(int fd);
 };
 
 #endif

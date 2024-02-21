@@ -21,6 +21,7 @@ class Client
 {
 
 	typedef std::vector<pollfd>::iterator pollfds_iterator;
+//	typedef std::vector<>
 
 	private:
 		int _fd;
