@@ -1,4 +1,5 @@
 #include "network/Server.hpp"
+#include <cerrno>
 #include <sys/epoll.h>
 
 Server::Server(const std::string &port, const std::string &password)
@@ -13,46 +14,74 @@ Server::~Server() {
 }
 
 void Server::start() {
-	pollfd server_fd = {_sock, POLLIN, 0}; //fd, watching events, return events
-	_pollfds.push_back(server_fd);
+//	pollfd server_fd = {_sock, POLLIN, 0}; //fd, watching events, return events
+//	_pollfds.push_back(server_fd);
 
+	addEvent(_sock);
 	ft_log("Server listening...");
 
-
 	while (_running) {
-
-		// Loop waiting for incoming connects or for incoming data on any of the connected sockets.
-		if (poll(_pollfds.begin().base(), _pollfds.size(), -1) < 0)
-			throw std::runtime_error("Error while polling from fd.");
-
-		// One or more descriptors are readable. Need to determine which ones they are.
-		for (pollfds_iterator it = _pollfds.begin(); it != _pollfds.end(); it++) {
-
-			//nothing happened
-			if (it->revents == 0)
-				continue;
-
-			//disconnect
-			//if (it->revents == POLLHUP) {
-			if ((it->revents & POLLHUP) == POLLHUP) {
-				onClientDisconnect(it->fd);
+		/*
+		 * epoll 
+		 *
+		 **/
+		int epoll_num = epoll_wait(_epollfd, _ev, MAX_CONNECTIONS, 0);
+		if (epoll_num == -1){
+			throw std::runtime_error("Error while event polling from epollfd.");
+			//error
+		}
+		for (int i = 0; i < epoll_num; i++) {
+			//Found data in READ BUFFER.
+			if ((_ev[i].events & EPOLLIN) == EPOLLIN){
+				//connection
+				if (_ev[i].data.fd == _sock)
+					onClientConnect();
+				//message recv
+				else if (_ev[i].data.fd != _sock)
+					onClientMessage(_ev[i].data.fd);
+			}
+				//passive disconnection
+			else if ((_ev[i].events & EPOLLHUP) == EPOLLHUP)
+				onClientDisconnect(_ev[i].data.fd);
 				break;
 			}
-
-			//data in read buffer.
-			if ((it->revents & POLLIN) == POLLIN) {
-
-				//connect
-				if (it->fd == _sock) {
-					onClientConnect();
-					break;
-				}
-				//got message
-				onClientMessage(it->fd);
-			}
 		}
+
+		
+		/*
+		 * poll
+		 */
+		// Loop waiting for incoming connects or for incoming data on any of the connected sockets.
+//		if (poll(_pollfds.begin().base(), _pollfds.size(), -1) < 0)
+//			throw std::runtime_error("Error while polling from fd.");
+//
+//		// One or more descriptors are readable. Need to determine which ones they are.
+//		for (pollfds_iterator it = _pollfds.begin(); it != _pollfds.end(); it++) {
+//
+//			//nothing happened
+//			if (it->revents == 0)
+//				continue;
+//
+//			//disconnect
+//			//if (it->revents == POLLHUP) {
+//			if ((it->revents & POLLHUP) == POLLHUP) {
+//				onClientDisconnect(it->fd);
+//				break;
+//			}
+//
+//			//data in read buffer.
+//			if ((it->revents & POLLIN) == POLLIN) {
+//
+//				//connect
+//				if (it->fd == _sock) {
+//					onClientConnect();
+//					break;
+//				}
+//				//got message
+//				onClientMessage(it->fd);
+//			}
+//		}
 		//system("leaks ircserv");
-	}
 }
 
 int Server::newSocket() {
@@ -102,9 +131,8 @@ int Server::newSocket() {
 		throw std::runtime_error("Error while listening on socket.");
 
 	//static size
-	if ((_ev = (epoll_event *)calloc(1024, sizeof(struct epoll_event))) == NULL)
+	if ((_ev = (epoll_event *)calloc(MAX_CONNECTIONS, sizeof(struct epoll_event))) == NULL)
 		throw std::runtime_error("Error while creating epoll event struct.");
-	addEvent(_sock);
 	return sockfd;
 }
 
@@ -164,26 +192,33 @@ void Server::onClientConnect() {
 	sockaddr_in s_address = {};
 	socklen_t s_size = sizeof(s_address);
 
-	fd = accept(_sock, (sockaddr *) &s_address, &s_size);
-	if (fd < 0)
-		throw std::runtime_error("Error while accepting new client.");
+	//fixing non-blocking accept
+	while (true){
+		fd = accept(_sock, (sockaddr *) &s_address, &s_size);
+		if (fd < 0){
+			if (errno == EAGAIN)
+				break;
+			else
+				throw std::runtime_error("Error while accepting new client.");
+		}
+		//epoll
+		addEvent(fd);
+		//poll connection
+//		pollfd pollfd = {fd, POLLIN, 0};
+//		_pollfds.push_back(pollfd);
+		
+		char hostname[NI_MAXHOST];
+		if (getnameinfo((struct sockaddr *) &s_address, sizeof(s_address), hostname, NI_MAXHOST, NULL, 0, NI_NUMERICSERV) !=
+			0)
+			throw std::runtime_error("Error while getting hostname on new client.");
+		Client *client = new Client(fd, hostname, ntohs(s_address.sin_port));
+		_clients.insert(std::make_pair(fd, client));
 
-	pollfd pollfd = {fd, POLLIN, 0};
-	_pollfds.push_back(pollfd);
+		//char message[1000];
+		//sprintf(message, "%s:%d has connected.", client->getHostname().c_str(), client->getPort());
+		ft_log(makeLogMessage(client->getHostname(), client->getPort()));
+	}
 
-	char hostname[NI_MAXHOST];
-	if (getnameinfo((struct sockaddr *) &s_address, sizeof(s_address), hostname, NI_MAXHOST, NULL, 0, NI_NUMERICSERV) !=
-		0)
-		throw std::runtime_error("Error while getting hostname on new client.");
-
-	Client *client = new Client(fd, hostname, ntohs(s_address.sin_port));
-	_clients.insert(std::make_pair(fd, client));
-
-	//char message[1000];
-	//sprintf(message, "%s:%d has connected.", client->getHostname().c_str(), client->getPort());
-	ft_log(makeLogMessage(client->getHostname(), client->getPort()));
-	//epoll
-	addEvent(fd);
 }
 
 void Server::onClientDisconnect(int fd) {
@@ -200,14 +235,15 @@ void Server::onClientDisconnect(int fd) {
 
 		//epoll
 		delEvent(fd);
+		closeFd(fd);
 
-		for (pollfds_iterator it = _pollfds.begin(); it != _pollfds.end(); it++) {
-			if (it->fd != fd)
-				continue;
-			_pollfds.erase(it);
-			close(fd);
-			break;
-		}
+//		for (pollfds_iterator it = _pollfds.begin(); it != _pollfds.end(); it++) {
+//			if (it->fd != fd)
+//				continue;
+//			_pollfds.erase(it);
+//			close(fd);
+//			break;
+//		}
 
 		delete client;
 	}
@@ -233,6 +269,16 @@ void Server::onClientMessage(int fd)
 }
 
 Client *Server::getClient(const std::string &nickname) {
+	//on refactoring
+//	std::map<std::string, int>::iterator it = _clientsFdByNickname.find(nickname);
+//	if (it == _clientsFdByNickname.end())
+//		return (NULL);
+//	int clientFd = it -> second;
+//	std::map<int, Client *>::iterator clients_iterator = _clients.find(clientFd);
+//	if (clients_iterator == _clients.end())
+//		return NULL;
+//	Client *cli_ret = clients_iterator -> second;
+//	return (cli_ret);
 	for (std::map<int, Client *>::iterator it = _clients.begin(); it != _clients.end(); it++) {
 		if (!nickname.compare(it->second->getNickname()))
 			return it->second;
@@ -249,8 +295,7 @@ Channel *Server::getChannel(const std::string &name) {
 	return NULL;
 }
 
-Channel *Server::createChannel(const std::string &name, const std::string &password, Client *client)
-{
+Channel *Server::createChannel(const std::string &name, const std::string &password, Client *client) {
 	Channel *channel = new Channel(name, password, client);
 	_channels.push_back(channel);
 	channel->setInvitemode(false); // sungjuki
@@ -270,6 +315,9 @@ int Server::addEvent(int fd){
 int Server::delEvent(int fd){
 	if (epoll_ctl(_epollfd, EPOLL_CTL_ADD, fd, NULL) == -1)
 		return (-1);
-	close(fd);
 	return (0);
+}
+
+int Server::closeFd(int fd){ 
+	return (close(fd));
 }

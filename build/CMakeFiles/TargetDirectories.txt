@@ -1,0 +1,3 @@
+/home/dongwoo_kwak_ck1_3/irc_server/build/CMakeFiles/rebuild_cache.dir
+/home/dongwoo_kwak_ck1_3/irc_server/build/CMakeFiles/edit_cache.dir
+/home/dongwoo_kwak_ck1_3/irc_server/build/CMakeFiles/ircserv.dir

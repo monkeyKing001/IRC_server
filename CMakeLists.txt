@@ -1,6 +1,14 @@
 cmake_minimum_required(VERSION 3.16)
 project(ft_irc)
-set(CMAKE_CXX_STANDARD 98)
+set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
+set(CMAKE_CXX_STANDARD 17)
+
+message(STATUS "Compiler")
+message(STATUS " - ID       \t: ${CMAKE_CXX_COMPILER_ID}")
+message(STATUS " - Version  \t: ${CMAKE_CXX_COMPILER_VERSION}")
+message(STATUS " - Path     \t: ${CMAKE_CXX_COMPILER}")
+
+
 
 include_directories(include)
 include_directories(include/network)

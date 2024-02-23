@@ -10,5 +10,5 @@ void QuitCommand::execute(Client *client, std::vector<std::string> arguments) {
 	reason = reason.at(0) == ':' ? reason.substr(1) : reason;
 
 	client->write(RPL_QUIT(client->getPrefix(), reason));
-	//_server->onClientDisconnect(client->getFD()); 	//-> 이거 주석 처리 왜 했을까
+	_server->onClientDisconnect(client->getFD());
 }
