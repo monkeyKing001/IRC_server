@@ -1,5 +1,6 @@
 #include "network/Server.hpp"
 #include <cerrno>
+#include <netinet/in.h>
 #include <sys/epoll.h>
 
 Server::Server(const std::string &port, const std::string &password)
@@ -14,8 +15,6 @@ Server::~Server() {
 }
 
 void Server::start() {
-//	pollfd server_fd = {_sock, POLLIN, 0}; //fd, watching events, return events
-//	_pollfds.push_back(server_fd);
 
 	addEvent(_sock);
 	ft_log("Server listening...");
@@ -46,41 +45,6 @@ void Server::start() {
 				break;
 			}
 		}
-
-		
-		/*
-		 * poll
-		 */
-		// Loop waiting for incoming connects or for incoming data on any of the connected sockets.
-//		if (poll(_pollfds.begin().base(), _pollfds.size(), -1) < 0)
-//			throw std::runtime_error("Error while polling from fd.");
-//
-//		// One or more descriptors are readable. Need to determine which ones they are.
-//		for (pollfds_iterator it = _pollfds.begin(); it != _pollfds.end(); it++) {
-//
-//			//nothing happened
-//			if (it->revents == 0)
-//				continue;
-//
-//			//disconnect
-//			//if (it->revents == POLLHUP) {
-//			if ((it->revents & POLLHUP) == POLLHUP) {
-//				onClientDisconnect(it->fd);
-//				break;
-//			}
-//
-//			//data in read buffer.
-//			if ((it->revents & POLLIN) == POLLIN) {
-//
-//				//connect
-//				if (it->fd == _sock) {
-//					onClientConnect();
-//					break;
-//				}
-//				//got message
-//				onClientMessage(it->fd);
-//			}
-//		}
 		//system("leaks ircserv");
 }
 
@@ -138,12 +102,13 @@ int Server::newSocket() {
 
 int Server::readMessage(int fd) 
 {
-		int n;
+	int n;
 	Client* client;
 	std::map<int, Client *>::iterator it =  _clients.find(fd);
 
-	if (it == _clients.end())
+	if (it == _clients.end()){
 		return (1);
+	}
 	client = it->second;
 
 	char buffer[100];
@@ -203,22 +168,11 @@ void Server::onClientConnect() {
 		}
 		//epoll
 		addEvent(fd);
-		//poll connection
-//		pollfd pollfd = {fd, POLLIN, 0};
-//		_pollfds.push_back(pollfd);
 		
-		char hostname[NI_MAXHOST];
-		if (getnameinfo((struct sockaddr *) &s_address, sizeof(s_address), hostname, NI_MAXHOST, NULL, 0, NI_NUMERICSERV) !=
-			0)
+		//register client
+		if (registerClient(fd, &s_address) == -1)
 			throw std::runtime_error("Error while getting hostname on new client.");
-		Client *client = new Client(fd, hostname, ntohs(s_address.sin_port));
-		_clients.insert(std::make_pair(fd, client));
-
-		//char message[1000];
-		//sprintf(message, "%s:%d has connected.", client->getHostname().c_str(), client->getPort());
-		ft_log(makeLogMessage(client->getHostname(), client->getPort()));
 	}
-
 }
 
 void Server::onClientDisconnect(int fd) {
@@ -236,14 +190,6 @@ void Server::onClientDisconnect(int fd) {
 		//epoll
 		delEvent(fd);
 		closeFd(fd);
-
-//		for (pollfds_iterator it = _pollfds.begin(); it != _pollfds.end(); it++) {
-//			if (it->fd != fd)
-//				continue;
-//			_pollfds.erase(it);
-//			close(fd);
-//			break;
-//		}
 
 		delete client;
 	}
@@ -301,6 +247,19 @@ Channel *Server::createChannel(const std::string &name, const std::string &passw
 	channel->setInvitemode(false); // sungjuki
 
 	return channel;
+}
+
+int Server::registerClient(int cli_fd, sockaddr_in *s_addr){
+
+	char hostname[NI_MAXHOST];
+		if (getnameinfo((struct sockaddr *) &s_addr, sizeof(*s_addr), hostname, NI_MAXHOST, NULL, 0, NI_NUMERICSERV) !=
+			0)
+			return (-1);
+		Client *client = new Client(cli_fd, hostname, ntohs(s_addr -> sin_port));
+		_clients.insert(std::make_pair(cli_fd, client));
+		ft_log(makeLogMessage(client->getHostname(), client->getPort()));
+
+	return (_clients.size());
 }
 
 int Server::addEvent(int fd){

@@ -27,7 +27,18 @@
 //#define ERR_INVITEONLYCHAN(source, channel)  			"473 " + source + " :Cannot join to channel " + channel //sungjuki 
 
 // NUMERIC REPLIES
-#define RPL_WELCOME(source)						"001 " + source + " :Welcome " + source + " to the ft_irc network"
+#define RPL_WELCOME(source)								"001 " + source + " :Welcome " + source + " to the ft_irc network"
+#define RPL_YOURHOST(source)							"002 " + source + " :Your host is " + source + " running ft_irc"
+#define RPL_CREATED(source)								"003 " + source + " :This server was created "
+#define RPL_MYINFO(source)								"004 " + source + "<servername> <version> <available umodes> <available cmodes>"
+#define RPL_ISUPPORT(source)							"005 " + source + "<client> <1-13 tokens> :are supported by this server"
+#define RPL_LUSERCLIENT(source)							"251 "
+#define RPL_LUSEROP(source)								"252 "
+#define RPL_LUSERUNKNOWN(source)						"253 "
+#define RPL_LUSERCHANNELS(source)						"254 "
+#define RPL_LUSERME(source)								"255 "
+#define RPL_LOCALLUSER(source)							"265 "
+#define RPL_GLOBALUSERS(source)							"266 "
 #define RPL_NAMREPLY(source, channel, users)	"353 " + source + " = " + channel + " :" + users
 #define RPL_ENDOFNAMES(source, channel)			"366 " + source + " " + channel + " :End of /NAMES list."
 

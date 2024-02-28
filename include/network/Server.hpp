@@ -62,6 +62,7 @@ public:
 	void onClientMessage(int fd);
 	int	 readMessage(int fd);
 	const std::string getServername() { return this->_host; }; //sungjuki
+	int registerClient(int cli_fd, sockaddr_in *s_addr);
 	int addEvent(int fd);
 	int delEvent(int fd);
 	int closeFd(int fd);
