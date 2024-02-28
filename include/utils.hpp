@@ -32,15 +32,11 @@
 #define RPL_CREATED(source)								"003 " + source + " :This server was created "
 #define RPL_MYINFO(source)								"004 " + source + "<servername> <version> <available umodes> <available cmodes>"
 #define RPL_ISUPPORT(source)							"005 " + source + "<client> <1-13 tokens> :are supported by this server"
-#define RPL_LUSERCLIENT(source)							"251 "
-#define RPL_LUSEROP(source)								"252 "
-#define RPL_LUSERUNKNOWN(source)						"253 "
-#define RPL_LUSERCHANNELS(source)						"254 "
-#define RPL_LUSERME(source)								"255 "
-#define RPL_LOCALLUSER(source)							"265 "
-#define RPL_GLOBALUSERS(source)							"266 "
-#define RPL_NAMREPLY(source, channel, users)	"353 " + source + " = " + channel + " :" + users
-#define RPL_ENDOFNAMES(source, channel)			"366 " + source + " " + channel + " :End of /NAMES list."
+#define RPL_NAMREPLY(source, channel, users)			"353 " + source + " = " + channel + " :" + users
+#define RPL_MOTD(source)								"372 " + source + " : * H E L L O"
+#define RPL_MOTDSTART(source)							"375 " + source + " :<server host> message of the day."
+#define RPL_ENDOFMOTD(source, channel)					"376 " + source + " :End of /MOTD command."
+#define RPL_ENDOFNAMES(source, channel)					"366 " + source + " " + channel + " :End of /NAMES list."
 
 // COMMAND REPLIES
 #define RPL_JOIN(source, channel)					":" + source + " JOIN :" + channel
