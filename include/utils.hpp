@@ -48,6 +48,7 @@
 #define RPL_KICK(source, channel, target, reason)	":" + source + " KICK " + channel + " " + target + " :" + reason
 #define RPL_MODE(source, channel, modes, args)		":" + source + " MODE " + channel + " " + modes + " " + args
 #define RPL_TOPIC(source, channel, args)			":" + source + " TOPIC " + channel + " :" + args //dokwak
+#define RPL_NICK(source, args)						":" + source + " NICK :" + args
 
 //	localhost 341 invitornick targetnikc :#channelname
 #define RPL_INVITING(user_id, client, channel)      user_id + " 341 " + client + " invites you to " + channel	//sungjuki

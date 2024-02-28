@@ -252,8 +252,7 @@ Channel *Server::createChannel(const std::string &name, const std::string &passw
 int Server::registerClient(int cli_fd, sockaddr_in *s_addr){
 
 	char hostname[NI_MAXHOST];
-		if (getnameinfo((struct sockaddr *) &s_addr, sizeof(*s_addr), hostname, NI_MAXHOST, NULL, 0, NI_NUMERICSERV) !=
-			0)
+		if (getnameinfo((struct sockaddr *)s_addr, sizeof(*s_addr), hostname, NI_MAXHOST, NULL, 0, NI_NUMERICSERV) != 0)
 			return (-1);
 		Client *client = new Client(cli_fd, hostname, ntohs(s_addr -> sin_port));
 		_clients.insert(std::make_pair(cli_fd, client));

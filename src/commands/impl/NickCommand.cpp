@@ -17,6 +17,9 @@ void NickCommand::execute(Client *client, std::vector<std::string> arguments) {
 		client->reply(ERR_NICKNAMEINUSE(client->getNickname()));
 		return;
 	}
-	client->setNickname(nickname);
-	client->welcome();
+	else{
+		client->write(RPL_NICK(client->getPrefix(), nickname));
+		client->setNickname(nickname);
+		client->welcome();
+	}
 }

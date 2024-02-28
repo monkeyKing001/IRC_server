@@ -26,16 +26,13 @@ CommandHandler::~CommandHandler()
 
 void CommandHandler::invoke(Client *client, const std::string &message)
 {
-
 	std::stringstream ssMessage(message);
 	std::string syntax;
 
 	while (std::getline(ssMessage, syntax))
 	{
-
 		syntax = syntax.substr(0, syntax[syntax.length() - 1] == '\r' ? syntax.length() - 1 : syntax.length());
 		std::string name = syntax.substr(0, syntax.find(' '));
-		
 		for (unsigned long i = 0; i < name.length(); i++) {
 			name[i] = toupper(name[i]);
 		}

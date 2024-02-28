@@ -20,9 +20,6 @@ class Client;
 class Client
 {
 
-	typedef std::vector<pollfd>::iterator pollfds_iterator;
-//	typedef std::vector<>
-
 	private:
 		int _fd;
 		std::string _hostname;
