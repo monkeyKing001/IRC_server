@@ -1,6 +1,14 @@
 #ifndef FT_IRC_CLIENT_HPP
 # define FT_IRC_CLIENT_HPP
 
+class Client;
+
+#include <vector>
+#include <string>
+#include <sys/epoll.h>
+#include <sys/socket.h>
+#include "utils.hpp"
+
 enum ClientState {
 	HANDSHAKE,
 	LOGIN,
@@ -8,13 +16,16 @@ enum ClientState {
 	DISCONNECTED
 };
 
-class Client;
+/*! \enum EPOLL_EVENTS_STATE
+ *
+ *  Clients' EPOLL EVENT activation status.
+ */
+enum EpollEventsState {
+	EPOLL_READY_INNOUT = EPOLLIN | EPOLLOUT,
+	EPOLL_READY_IN = EPOLLIN,
+	EPOLL_READY_OUT = EPOLLOUT
+};
 
-#include <vector>
-#include <string>
-#include <sys/poll.h>
-#include <sys/socket.h>
-#include "utils.hpp"
 #include "Channel.hpp"
 
 class Client
@@ -22,6 +33,7 @@ class Client
 
 	private:
 		int _fd;
+		const int _serverEpollFd;
 		std::string _hostname;
 		int _port;
 
@@ -33,11 +45,11 @@ class Client
 
 		Channel *_channel;
 		std::string _receivedMessage;
-		std::string _broadcastBuffer;
+		std::string _sendBuffer;
 
 
 	public:
-		Client(int fd, const std::string &hostname, int port);
+		Client(int fd, const std::string &hostname, int port, int _serverEpollFd);
 		~Client();
 
 		int getFD() const { return _fd; };
@@ -50,18 +62,20 @@ class Client
 		std::string getPrefix() const;
 		Channel *getChannel() const { return _channel; };
 		std::string&	getReceivedMessage() { return _receivedMessage; };
-		std::string&	getBroadcastBuffer() { return _broadcastBuffer;  };
+		std::string& 	getSendBuffer() { return _sendBuffer; };
 		void setNickname(const std::string &nickname) { _nickname = nickname; };
 		void setUsername(const std::string &username) { _username = username; };
 		void setRealName(const std::string &realname) { _realname = realname; };
 		void setState(ClientState state) { _state = state; };
 		void setChannel(Channel *channel) { _channel = channel; };
-		void write(const std::string &message) const;
+		void write(const std::string &message);
+		void sendBuffer() const;
+		void flushSendBuffer() { _sendBuffer = ""; }
 		void reply(const std::string &reply);
 		void welcome();
 		void join(Channel *channel);
 		void leave();
-		void flushBroadcastBuffer();
+		void setEpollEventState(EpollEventsState es) const;
 };
 
 #endif

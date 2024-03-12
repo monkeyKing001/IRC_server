@@ -56,6 +56,18 @@
 // :invitornick!sungjunee@localhost IVITE targetnick : #channelname
 //#define RPL_INVITE(user_id, client, channel) 			"INVITE " + client + " " + channel	//sungjuki
 
+//Colors
+//
+ #define DEFAULT		"\033[0;39m"
+ #define GRAY			"\033[0;90m"
+ #define RED 			"\033[0;91m"
+ #define GREEN			"\033[0;92m"
+ #define YELLOW			"\033[0;93ms"
+ #define BLUE			"\033[0;94m"
+ #define MAGENTA		"\033[0;95m"
+ #define CYAN			"\033[0;96m"
+ #define WHITE  		"\033[0;97m"
+
 
 static inline void ft_log(const std::string &message) {
 	time_t rawtime;

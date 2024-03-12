@@ -33,23 +33,31 @@ void Server::start() {
 			if ((_ev[i].events & EPOLLIN) == EPOLLIN){
 				//connection
 				if (_ev[i].data.fd == _sock){
+					std::cout << RED;
 					ft_log("EPOLLIN from listener socket");
+					std::cout << DEFAULT;
 					onClientConnect();
 				}
 				//message recv
 				else if (_ev[i].data.fd != _sock){
+					std::cout << CYAN;
 					ft_log("EPOLLIN from client socket");
+					std::cout << DEFAULT;
 					onClientMessage(_ev[i].data.fd);
 				}
 			}
 			//send on half disconnected socket error
 			else if ((_ev[i].events & EPOLLHUP) == EPOLLHUP){
+				std::cout << RED;
 				ft_log("EPOLLHUP EVENT called");
+				std::cout << DEFAULT;
 				onClientDisconnect(_ev[i].data.fd);
 			}
 			//send on writable fd send buffer
 			else if ((_ev[i].events & EPOLLOUT) == EPOLLOUT){
+				std::cout << GREEN;
 				ft_log("EPOLLOUT EVENT called");
+				std::cout << DEFAULT;
 				onClientSend(_ev[i].data.fd);
 			}
 		}
@@ -133,7 +141,6 @@ int Server::readMessage(int fd)
 			return (-1);
 		buffer[n] = '\0';
 
-		std::cout << "buffer[100]: " << buffer << std::endl;
 		if (std::strstr(buffer, "\r\n"))	// irssi 프로토콜로 메시지가 오는 경우
 		{
 			std::cout << "[From Irssi client]" << std::endl;
@@ -196,8 +203,6 @@ void Server::onClientDisconnect(int fd) {
 		Client *client = _clients.at(fd);
 		client->leave();
 
-		//char message[1000];
-		//sprintf(message, "%s:%d has disconnected.", client->getHostname().c_str(), client->getPort());
 		ft_log(makeDisconnectLogMessage(client->getHostname(), client->getPort()));
 		_clients.erase(fd);
 
@@ -234,24 +239,17 @@ void Server::onClientMessage(int fd)
 void Server::onClientSend(int fd){
 	try {
 		Client *client = _clients.at(fd);
-		if (client -> getBroadcastBuffer().length() != 0)
-			client -> flushBroadcastBuffer();
+		std::cout << "[From Server To Irssi client]" << std::endl;
+		std::cout << "Sending to Client: " << client -> getSendBuffer() << std::endl;
+		client -> sendBuffer();
+		client -> flushSendBuffer();
 	}
 	catch (const std::out_of_range &ex) {
 	}
 }
 
 Client *Server::getClient(const std::string &nickname) {
-	//on refactoring
-//	std::map<std::string, int>::iterator it = _clientsFdByNickname.find(nickname);
-//	if (it == _clientsFdByNickname.end())
-//		return (NULL);
-//	int clientFd = it -> second;
-//	std::map<int, Client *>::iterator clients_iterator = _clients.find(clientFd);
-//	if (clients_iterator == _clients.end())
-//		return NULL;
-//	Client *cli_ret = clients_iterator -> second;
-//	return (cli_ret);
+	//TODO: O(n) -> O(1) refactoring
 	for (std::map<int, Client *>::iterator it = _clients.begin(); it != _clients.end(); it++) {
 		if (!nickname.compare(it->second->getNickname()))
 			return it->second;
@@ -269,9 +267,9 @@ Channel *Server::getChannel(const std::string &name) {
 }
 
 Channel *Server::createChannel(const std::string &name, const std::string &password, Client *client) {
-	Channel *channel = new Channel(name, password, client);
+	Channel *channel = new Channel(name, password, client, _epollfd);
 	_channels.push_back(channel);
-	channel->setInvitemode(false); // sungjuki
+	channel->setInvitemode(false);
 
 	return channel;
 }
@@ -281,30 +279,16 @@ int Server::registerClient(int cli_fd, sockaddr_in *s_addr){
 	char hostname[NI_MAXHOST];
 		if (getnameinfo((struct sockaddr *)s_addr, sizeof(*s_addr), hostname, NI_MAXHOST, NULL, 0, NI_NUMERICSERV) != 0)
 			return (-1);
-		Client *client = new Client(cli_fd, hostname, ntohs(s_addr -> sin_port));
+		Client *client = new Client(cli_fd, hostname, ntohs(s_addr -> sin_port), _epollfd);
 		_clients.insert(std::make_pair(cli_fd, client));
 		ft_log(makeLogMessage(client->getHostname(), client->getPort()));
 
 	return (_clients.size());
 }
 
-int Server::fcntl_setnb(int fd){
-	return (fcntl(fd, F_SETFL, O_NONBLOCK));
-}
-
 int Server::addEvent(int fd){
 	struct epoll_event newEv;
-	newEv.events = EPOLLIN | EPOLLPRI | EPOLLOUT;
+	newEv.events = EPOLLIN;
 	newEv.data.fd = fd;
 	return (epoll_ctl(_epollfd, EPOLL_CTL_ADD, fd, &newEv));
-}
-
-int Server::delEvent(int fd){
-	if (epoll_ctl(_epollfd, EPOLL_CTL_ADD, fd, NULL) == -1)
-		return (-1);
-	return (0);
-}
-
-int Server::closeFd(int fd){ 
-	return (close(fd));
 }

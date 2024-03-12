@@ -13,6 +13,7 @@ class Channel
 	typedef std::vector<Client *>::iterator clients_iterator;
 
 private:
+	const int				_serverEpollFd;
 	std::string				_name;
 	Client					*_admin;
 	std::vector<Client *>	_admins;//sungjuki
@@ -28,7 +29,7 @@ private:
 	bool					_i;//sungjuki
 
 public:
-	Channel(const std::string &name, const std::string &password, Client *admin);
+	Channel(const std::string &name, const std::string &password, Client *admin, int _serverEpollFd);
 	~Channel();
 
 	Client* getAdmin() { return _admin; };
@@ -62,6 +63,7 @@ public:
 	void broadcast(const std::string &message, Client *exclude);
 	void removeClient(Client *client);
 	void addClient(Client *client) { _clients.push_back(client); };
+	void setClientEpollState(Client *client, EpollEventsState es);
 	void kick(Client *client, Client *target, const std::string &reason);
 
 };

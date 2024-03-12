@@ -17,15 +17,14 @@ class Server;
 #include <errno.h>
 #include <sys/epoll.h>
 
-#include "commands/CommandHandler.hpp"
 #include "Client.hpp"
 #include "Channel.hpp"
+#include "commands/CommandHandler.hpp"
 
 #define MAX_CONNECTIONS 1000
 
 class Server
 {
-	typedef std::vector<pollfd>::iterator pollfds_iterator;
 	typedef std::map<int, Client *>::iterator clients_iterator;
 	typedef std::vector<Channel *>::iterator channels_iterator;
 
@@ -34,10 +33,8 @@ class Server
 	const std::string			_host;
 	const std::string			_port;
 	const std::string			_password;
-	std::vector<pollfd>			_pollfds;
 	int 						_epollfd;
 	struct epoll_event *		_ev;
-	std::vector<epoll_event>    _evs;
 	
 	std::map<int, Client *>		_clients;
 	std::map<std::string, int> 	_clientsFdByNickname;
@@ -64,10 +61,11 @@ public:
 	int	 readMessage(int fd);
 	const std::string getServername() { return this->_host; }; //sungjuki
 	int registerClient(int cli_fd, sockaddr_in *s_addr);
-	int fcntl_setnb(int fd);
+	int fcntl_setnb(int fd){ return (fcntl(fd, F_SETFL, O_NONBLOCK)); }
 	int addEvent(int fd);
-	int delEvent(int fd);
-	int closeFd(int fd);
+	int delEvent(int fd) { return (epoll_ctl(_epollfd, EPOLL_CTL_DEL, fd, NULL)); }
+	int closeFd(int fd) { return (close(fd)); }
+
 };
 
 #endif

@@ -1,8 +1,8 @@
 #include <iostream>
 #include "network/Client.hpp"
 
-Client::Client(int fd,const std::string &hostname, int port)
-		: _fd(fd), _hostname(hostname), _port(port), _state(HANDSHAKE), _channel(NULL) {
+Client::Client(int fd,const std::string &hostname, int port, int _serverEpollFd)
+		: _fd(fd), _hostname(hostname), _port(port), _serverEpollFd(_serverEpollFd), _state(HANDSHAKE), _channel(NULL) {
 }
 
 Client::~Client() {}
@@ -11,12 +11,10 @@ std::string Client::getPrefix() const {
 	return _nickname + (_username.empty() ? "" : "!" + _username) + (_hostname.empty() ? "" : "@" + _hostname);
 }
 
-void Client::write(const std::string &message) const
+void Client::write(const std::string &message)
 {
-	//std::cout << "-> " << message << std::endl;
-	std::string buffer = message + "\r\n";
-	if (send(_fd, buffer.c_str(), buffer.length(), 0) < 0)
-		throw std::runtime_error("Error while sending message to client.");
+	_sendBuffer = message + "\r\n";
+	setEpollEventState(EPOLL_READY_INNOUT);
 }
 
 void Client::reply(const std::string &reply) {
@@ -32,8 +30,6 @@ void Client::welcome() {
 
 	std::string message;
 	ft_log(message);
-	//char message[100];
-	//ft_log(message);
 }
 
 void Client::join(Channel *channel)
@@ -52,8 +48,6 @@ void Client::join(Channel *channel)
 
 	channel->broadcast(RPL_JOIN(getPrefix(), channel->getName()));
 
-	//char message[100];
-	//sprintf(message, "%s has joined channel %s.", _nickname.c_str(), channel->getName().c_str());
 	std::string message;
 	message.append(_nickname);
 	message.append(" has joined channel ");
@@ -94,8 +88,6 @@ void Client::leave()
 	_channel->broadcast(RPL_PART(getPrefix(), _channel->getName()));
 	_channel->removeClient(this);
 
-	//char message[100];
-	//sprintf(message, "%s has left channel %s.", _nickname.c_str(), name.c_str());
 	std::string message;
 	message.append(_nickname);
 	message.append(" has left channel ");
@@ -104,7 +96,16 @@ void Client::leave()
 	ft_log(message);
 }
 
-void Client::flushBroadcastBuffer(){
-	this -> write(_broadcastBuffer);
-	_broadcastBuffer = "";
+void Client::sendBuffer() const{
+	if (send(_fd, _sendBuffer.c_str(), _sendBuffer.length(), 0) < 0)
+		throw std::runtime_error("Error while sending message to client.");
+	setEpollEventState(EPOLL_READY_IN);
 }
+
+void Client::setEpollEventState(EpollEventsState es) const {
+	struct epoll_event newEvent;
+	newEvent.data.fd = _fd;
+	newEvent.events = es;
+	epoll_ctl(_serverEpollFd, EPOLL_CTL_MOD, _fd, &newEvent);
+}
+

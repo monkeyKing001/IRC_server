@@ -1,7 +1,8 @@
 #include "network/Channel.hpp"
+#include "network/Client.hpp"
 
-Channel::Channel(const std::string &name, const std::string &password, Client *admin)
-		: _name(name), _admin(admin), _k(password), _l(0), _n(false), _t(true), _i(false) {} //dokwak, sungjuki
+Channel::Channel(const std::string &name, const std::string &password, Client *admin, int _serverEpollFd)
+		: _name(name), _admin(admin), _k(password), _serverEpollFd(_serverEpollFd), _l(0), _n(false), _t(true), _i(false) {} //dokwak, sungjuki
 
 Channel::~Channel() {}
 
@@ -21,9 +22,7 @@ std::vector<std::string> Channel::getNicknames()
 void Channel::broadcast(const std::string &message)
 {
 	for (clients_iterator it = _clients.begin(); it != _clients.end(); it++){
-		std::string &broadcastBuf = (*it)-> getBroadcastBuffer();
-		broadcastBuf.append(message);
-		//(*it)->write(message);
+		(*it)->write(message);
 	}
 }
 
@@ -32,13 +31,11 @@ void Channel::broadcast(const std::string &message, Client *exclude)
 	for (clients_iterator it = _clients.begin(); it != _clients.end(); it++)
 	{
 		if (*it == exclude) continue;
-		std::string &broadcastBuf = (*it)-> getBroadcastBuffer();
-		broadcastBuf.append(message);
-//		(*it)->write(message);
+		(*it)->write(message);
 	}
 }
 
-void Channel::removeClient(Client *client)	//check!!!
+void Channel::removeClient(Client *client)
 {
 	_clients.erase(std::remove(_clients.begin(), _clients.end(), client), _clients.end());
 	client->setChannel(NULL);
@@ -60,8 +57,6 @@ void Channel::removeClient(Client *client)	//check!!!
 			_admin = _clients.begin().operator*();
 		}	
 		
-		//char message[100];
-		//sprintf(message, "%s is now admin of channel %s.", _admin->getNickname().c_str(), _name.c_str());
 		std::string message;
 		message.append(_admin->getNickname());
 		message.append(" is now admin of channel ");
@@ -76,8 +71,6 @@ void Channel::kick(Client *client, Client *target, const std::string &reason)
 	broadcast(RPL_KICK(client->getPrefix(), _name, target->getNickname(), reason));
 	removeClient(target);
 
-	//char message[100];
-	//sprintf(message, "%s kicked %s from channel %s.", client->getNickname().c_str(), target->getNickname().c_str(), _name.c_str());
 	std::string message;
 	message.append(client->getNickname());
 	message.append(" kicked ");
