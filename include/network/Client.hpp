@@ -33,6 +33,7 @@ class Client
 
 		Channel *_channel;
 		std::string _receivedMessage;
+		std::string _broadcastBuffer;
 
 
 	public:
@@ -49,6 +50,7 @@ class Client
 		std::string getPrefix() const;
 		Channel *getChannel() const { return _channel; };
 		std::string&	getReceivedMessage() { return _receivedMessage; };
+		std::string&	getBroadcastBuffer() { return _broadcastBuffer;  };
 		void setNickname(const std::string &nickname) { _nickname = nickname; };
 		void setUsername(const std::string &username) { _username = username; };
 		void setRealName(const std::string &realname) { _realname = realname; };
@@ -59,6 +61,7 @@ class Client
 		void welcome();
 		void join(Channel *channel);
 		void leave();
+		void flushBroadcastBuffer();
 };
 
 #endif

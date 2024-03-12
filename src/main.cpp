@@ -2,7 +2,6 @@
 
 int main(int argc, char **argv)
 {
-
 	try {
 
 		if (argc != 3) {

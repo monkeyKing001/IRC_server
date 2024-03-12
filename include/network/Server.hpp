@@ -40,7 +40,7 @@ class Server
 	std::vector<epoll_event>    _evs;
 	
 	std::map<int, Client *>		_clients;
-	std::map<std::string, int> _clientsFdByNickname;
+	std::map<std::string, int> 	_clientsFdByNickname;
 	std::vector<Channel *>		_channels;
 	CommandHandler*				_commandHandler;
 
@@ -60,9 +60,11 @@ public:
 	void onClientDisconnect(int fd);
 	void onClientConnect();
 	void onClientMessage(int fd);
+	void onClientSend(int fd);
 	int	 readMessage(int fd);
 	const std::string getServername() { return this->_host; }; //sungjuki
 	int registerClient(int cli_fd, sockaddr_in *s_addr);
+	int fcntl_setnb(int fd);
 	int addEvent(int fd);
 	int delEvent(int fd);
 	int closeFd(int fd);

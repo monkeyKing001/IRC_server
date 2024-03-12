@@ -1,4 +1,5 @@
 #include "network/Server.hpp"
+#include "utils.hpp"
 #include <cerrno>
 #include <netinet/in.h>
 #include <sys/epoll.h>
@@ -22,29 +23,37 @@ void Server::start() {
 	while (_running) {
 		/*
 		 * epoll 
-		 *
 		 **/
 		int epoll_num = epoll_wait(_epollfd, _ev, MAX_CONNECTIONS, 0);
 		if (epoll_num == -1){
 			throw std::runtime_error("Error while event polling from epollfd.");
-			//error
 		}
 		for (int i = 0; i < epoll_num; i++) {
 			//Found data in READ BUFFER.
 			if ((_ev[i].events & EPOLLIN) == EPOLLIN){
 				//connection
-				if (_ev[i].data.fd == _sock)
+				if (_ev[i].data.fd == _sock){
+					ft_log("EPOLLIN from listener socket");
 					onClientConnect();
+				}
 				//message recv
-				else if (_ev[i].data.fd != _sock)
+				else if (_ev[i].data.fd != _sock){
+					ft_log("EPOLLIN from client socket");
 					onClientMessage(_ev[i].data.fd);
+				}
 			}
-				//passive disconnection
-			else if ((_ev[i].events & EPOLLHUP) == EPOLLHUP)
+			//send on half disconnected socket error
+			else if ((_ev[i].events & EPOLLHUP) == EPOLLHUP){
+				ft_log("EPOLLHUP EVENT called");
 				onClientDisconnect(_ev[i].data.fd);
-				break;
+			}
+			//send on writable fd send buffer
+			else if ((_ev[i].events & EPOLLOUT) == EPOLLOUT){
+				ft_log("EPOLLOUT EVENT called");
+				onClientSend(_ev[i].data.fd);
 			}
 		}
+	}
 		//system("leaks ircserv");
 }
 
@@ -69,9 +78,8 @@ int Server::newSocket() {
 	 * allowing it to return any data that the system has in it's read buffer
 	 * for that socket, but, it won't wait for that data.
 	 */
-	if (fcntl(sockfd, F_SETFL, O_NONBLOCK) == -1) {
+	if (fcntl_setnb(sockfd) < 0)
 		throw std::runtime_error("Error while setting socket to NON-BLOCKING.");
-	}
 
 	struct sockaddr_in serv_address = {};
 
@@ -121,6 +129,8 @@ int Server::readMessage(int fd)
 			if (errno != EWOULDBLOCK)
 				throw std::runtime_error("Error while reading buffer from client.");
 		}
+		if (n == 0)
+			return (-1);
 		buffer[n] = '\0';
 
 		std::cout << "buffer[100]: " << buffer << std::endl;
@@ -166,8 +176,12 @@ void Server::onClientConnect() {
 			else
 				throw std::runtime_error("Error while accepting new client.");
 		}
+		//set nonblocking
+		if (fcntl_setnb(fd) == -1)
+			throw std::runtime_error("Error while setting client fd as NON-BLOCKING.");
 		//epoll
-		addEvent(fd);
+		if (addEvent(fd) == -1)
+			throw std::runtime_error("Error while adding epoll event.");
 		
 		//register client
 		if (registerClient(fd, &s_address) == -1)
@@ -202,13 +216,26 @@ void Server::onClientMessage(int fd)
 	try {
 		std::string msg;
 		Client *client = _clients.at(fd);
-		if (readMessage(fd) == 0)	// 메시지 끝까지 잘 받았다면 
-		{
+		int readFlag = readMessage(fd);
+		if (readFlag == 0){	// 메시지 끝까지 잘 받았다면 
 			msg.append(client->getReceivedMessage());
 			client->getReceivedMessage().clear();
 			_commandHandler->invoke(client, msg);
 		}
-		// else // 메시지를 다 받지 못했다면
+		else if (readFlag == -1){//passive disconnection
+			ft_log("passive disconnection");
+			onClientDisconnect(fd);
+		}
+	}
+	catch (const std::out_of_range &ex) {
+	}
+}
+
+void Server::onClientSend(int fd){
+	try {
+		Client *client = _clients.at(fd);
+		if (client -> getBroadcastBuffer().length() != 0)
+			client -> flushBroadcastBuffer();
 	}
 	catch (const std::out_of_range &ex) {
 	}
@@ -261,13 +288,15 @@ int Server::registerClient(int cli_fd, sockaddr_in *s_addr){
 	return (_clients.size());
 }
 
+int Server::fcntl_setnb(int fd){
+	return (fcntl(fd, F_SETFL, O_NONBLOCK));
+}
+
 int Server::addEvent(int fd){
 	struct epoll_event newEv;
-	newEv.events = EPOLLIN | EPOLLPRI;
+	newEv.events = EPOLLIN | EPOLLPRI | EPOLLOUT;
 	newEv.data.fd = fd;
-	if (epoll_ctl(_epollfd, EPOLL_CTL_ADD, fd, &newEv) == -1)
-		return (-1);
-	return (0);
+	return (epoll_ctl(_epollfd, EPOLL_CTL_ADD, fd, &newEv));
 }
 
 int Server::delEvent(int fd){

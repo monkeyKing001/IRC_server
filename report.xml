@@ -1,0 +1,258 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dfxml xmloutputversion='1.0'>
+  <metadata 
+  xmlns='http://afflib.org/tcpflow/' 
+  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' 
+  xmlns:dc='http://purl.org/dc/elements/1.1/'>
+    <dc:type>Feature Extraction</dc:type>
+  </metadata>
+  <creator version='1.0'>
+    <program>TCPFLOW</program>
+    <version>1.6.1</version>
+    <build_environment>
+      <compiler>11.2.0 (11.2.0)</compiler>
+      <CPPFLAGS>-I/usr/local/include -Wdate-time -D_FORTIFY_SOURCE=2 -I/usr/local/include -DUTC_OFFSET=+0000</CPPFLAGS>
+      <CFLAGS>-g -g -O3 -ffile-prefix-map=/build/tcpflow-WmFafb/tcpflow-1.6.1=. -flto=auto -ffat-lto-objects -fstack-protector-strong -Wformat -Werror=format-security -MD -Wpointer-arith -Wmissing-declarations -Wmissing-prototypes -Wshadow -Wwrite-strings -Wcast-align -Waggregate-return -Wbad-function-cast -Wcast-qual -Wundef -Wredundant-decls -Wdisabled-optimization -Wfloat-equal -Wmultichar -Wc++-compat -Wmissing-noreturn -Wall -Wstrict-prototypes -MD -D_FORTIFY_SOURCE=2 -Wpointer-arith -Wmissing-declarations -Wmissing-prototypes -Wshadow -Wwrite-strings -Wcast-align -Waggregate-return -Wbad-function-cast -Wcast-qual -Wundef -Wredundant-decls -Wdisabled-optimization -Wfloat-equal -Wmultichar -Wc++-compat -Wmissing-noreturn -Wall -Wstrict-prototypes</CFLAGS>
+      <CXXFLAGS>-g -g -O3 -ffile-prefix-map=/build/tcpflow-WmFafb/tcpflow-1.6.1=. -flto=auto -ffat-lto-objects -fstack-protector-strong -Wformat -Werror=format-security -Wall -MD -D_FORTIFY_SOURCE=2 -Wpointer-arith -Wshadow -Wwrite-strings -Wcast-align -Wredundant-decls -Wdisabled-optimization -Wfloat-equal -Wmultichar -Wmissing-noreturn -Woverloaded-virtual -Wsign-promo -funit-at-a-time -Weffc++ -Wno-address-of-packed-member</CXXFLAGS>
+      <LDFLAGS>-L/usr/local/lib -Wl,-Bsymbolic-functions -flto=auto -Wl,-z,relro -L/usr/local/lib</LDFLAGS>
+      <LIBS>-lpcap -lcairo -lfontconfig -lfreetype -lpixman-1 -lexpat -lcrypto -lssl -lcrypto -ldl -lz </LIBS>
+      <compilation_date>2021-11-24T11:01:14</compilation_date>
+      <library name="boost" version="107400"/>
+    </build_environment>
+    <execution_environment>
+      <os_sysname>Linux</os_sysname>
+      <os_release>6.5.0-21-generic</os_release>
+      <os_version>#21~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Feb  9 13:32:52 UTC 2</os_version>
+      <host>dongwoo-kwak-ck1-3</host>
+      <arch>x86_64</arch>
+      <command_line>command line to be provided</command_line>
+      <uid>0</uid>
+      <username>root</username>
+      <start_time>2024-03-11T06:57:27Z</start_time>
+    </execution_environment>
+  </creator>
+  <configuration>
+  </configuration>
+  <tdelta>0</tdelta>
+  <configuration>
+    <fileobject>
+      <filename>127.000.000.001.51586-127.000.000.001.01234</filename>
+      <filesize>165</filesize>
+      <tcpflow startime='2024-03-11T07:10:46.390391Z' endtime='2024-03-11T07:10:50.752057Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='51586' dstport='1234' packets='16' len='1229' />
+    </fileobject>
+    <fileobject>
+      <filesize>0</filesize>
+      <tcpflow startime='2024-03-11T07:45:16.753977Z' endtime='2024-03-11T07:45:32.958474Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='1234' dstport='40346' packets='4' len='272' />
+    </fileobject>
+    <fileobject>
+      <filename>127.000.000.001.43502-127.000.000.001.01234</filename>
+      <filesize>539</filesize>
+      <tcpflow startime='2024-03-11T07:54:02.300550Z' endtime='2024-03-11T08:11:32.145067Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='43502' dstport='1234' packets='50' len='3835' />
+    </fileobject>
+    <fileobject>
+      <filename>127.000.000.001.01234-127.000.000.001.56606</filename>
+      <filesize>296</filesize>
+      <tcpflow startime='2024-03-11T07:52:08.395331Z' endtime='2024-03-11T10:16:28.622096Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='1234' dstport='56606' packets='23' len='1810' />
+    </fileobject>
+    <fileobject>
+      <filesize>0</filesize>
+      <tcpflow startime='2024-03-11T10:16:31.295249Z' endtime='2024-03-11T10:16:32.300530Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='43872' dstport='1234' packets='120116' len='7927664' />
+    </fileobject>
+    <fileobject>
+      <filesize>0</filesize>
+      <tcpflow startime='2024-03-11T10:48:50.699106Z' endtime='2024-03-11T10:48:50.699106Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='55636' dstport='1234' packets='1' len='74' />
+    </fileobject>
+    <fileobject>
+      <filesize>0</filesize>
+      <tcpflow startime='2024-03-11T10:48:50.074610Z' endtime='2024-03-11T10:48:50.074610Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='55620' dstport='1234' packets='1' len='74' />
+    </fileobject>
+    <fileobject>
+      <filename>127.000.000.001.58174-127.000.000.001.01234</filename>
+      <filesize>296</filesize>
+      <tcpflow startime='2024-03-11T10:26:55.380496Z' endtime='2024-03-11T10:29:22.831172Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='58174' dstport='1234' packets='29' len='2218' />
+    </fileobject>
+    <fileobject>
+      <filename>127.000.000.001.01234-127.000.000.001.60700</filename>
+      <filesize>99</filesize>
+      <tcpflow startime='2024-03-11T07:33:44.901220Z' endtime='2024-03-11T07:37:39.144360Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='1234' dstport='60700' packets='11' len='833' />
+    </fileobject>
+    <fileobject>
+      <filename>127.000.000.001.60700-127.000.000.001.01234</filename>
+      <filesize>79</filesize>
+      <tcpflow startime='2024-03-11T07:33:44.901216Z' endtime='2024-03-11T07:37:39.144367Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='60700' dstport='1234' packets='13' len='945' />
+    </fileobject>
+    <fileobject>
+      <filename>127.000.000.001.01234-127.000.000.001.40816</filename>
+      <filesize>99</filesize>
+      <tcpflow startime='2024-03-11T07:29:34.627841Z' endtime='2024-03-11T07:30:28.763395Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='1234' dstport='40816' packets='7' len='569' />
+    </fileobject>
+    <fileobject>
+      <filename>127.000.000.001.40816-127.000.000.001.01234</filename>
+      <filesize>75</filesize>
+      <tcpflow startime='2024-03-11T07:29:34.627838Z' endtime='2024-03-11T07:30:28.763404Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='40816' dstport='1234' packets='9' len='677' />
+    </fileobject>
+    <fileobject>
+      <filename>127.000.000.001.01234-127.000.000.001.36054</filename>
+      <filesize>861</filesize>
+      <tcpflow startime='2024-03-11T10:26:26.954452Z' endtime='2024-03-11T10:29:33.315518Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='1234' dstport='36054' packets='28' len='2717' />
+    </fileobject>
+    <fileobject>
+      <filename>127.000.000.001.01234-127.000.000.001.39420</filename>
+      <filesize>465</filesize>
+      <tcpflow startime='2024-03-11T07:35:28.407597Z' endtime='2024-03-11T07:37:39.144478Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='1234' dstport='39420' packets='13' len='1331' />
+    </fileobject>
+    <fileobject>
+      <filename>127.000.000.001.56606-127.000.000.001.01234</filename>
+      <filesize>116</filesize>
+      <tcpflow startime='2024-03-11T07:52:08.395327Z' endtime='2024-03-11T10:16:28.622084Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='56606' dstport='1234' packets='24' len='1708' />
+    </fileobject>
+    <fileobject>
+      <filename>127.000.000.001.01234-127.000.000.001.51042</filename>
+      <filesize>630</filesize>
+      <tcpflow startime='2024-03-11T07:11:03.243942Z' endtime='2024-03-11T07:14:51.800455Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='1234' dstport='51042' packets='17' len='1760' />
+    </fileobject>
+    <fileobject>
+      <filename>127.000.000.001.54728-127.000.000.001.01234</filename>
+      <filesize>750</filesize>
+      <tcpflow startime='2024-03-11T10:31:19.052230Z' endtime='2024-03-11T10:48:49.867784Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='54728' dstport='1234' packets='79' len='5972' />
+    </fileobject>
+    <fileobject>
+      <filename>127.000.000.001.01234-127.000.000.001.43502</filename>
+      <filesize>1468</filesize>
+      <tcpflow startime='2024-03-11T07:54:02.300557Z' endtime='2024-03-11T08:11:32.145050Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='1234' dstport='43502' packets='28' len='3324' />
+    </fileobject>
+    <fileobject>
+      <filename>127.000.000.001.36054-127.000.000.001.01234</filename>
+      <filesize>382</filesize>
+      <tcpflow startime='2024-03-11T10:26:26.954444Z' endtime='2024-03-11T10:29:33.315508Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='36054' dstport='1234' packets='35' len='2700' />
+    </fileobject>
+    <fileobject>
+      <filename>127.000.000.001.01234-127.000.000.001.38484</filename>
+      <filesize>160</filesize>
+      <tcpflow startime='2024-03-11T07:22:31.173467Z' endtime='2024-03-11T07:29:33.360948Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='1234' dstport='38484' packets='13' len='1026' />
+    </fileobject>
+    <fileobject>
+      <filename>127.000.000.001.39420-127.000.000.001.01234</filename>
+      <filesize>188</filesize>
+      <tcpflow startime='2024-03-11T07:35:28.407590Z' endtime='2024-03-11T07:37:39.144470Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='39420' dstport='1234' packets='17' len='1318' />
+    </fileobject>
+    <fileobject>
+      <filename>127.000.000.001.38484-127.000.000.001.01234</filename>
+      <filesize>84</filesize>
+      <tcpflow startime='2024-03-11T07:22:31.173463Z' endtime='2024-03-11T07:29:33.360938Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='38484' dstport='1234' packets='15' len='1082' />
+    </fileobject>
+    <fileobject>
+      <filesize>0</filesize>
+      <tcpflow startime='2024-03-11T10:23:01.890918Z' endtime='2024-03-11T10:23:01.890918Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='41326' dstport='1234' packets='1' len='74' />
+    </fileobject>
+    <fileobject>
+      <filename>127.000.000.001.51042-127.000.000.001.01234</filename>
+      <filesize>152</filesize>
+      <tcpflow startime='2024-03-11T07:11:03.243939Z' endtime='2024-03-11T07:14:51.800465Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='51042' dstport='1234' packets='24' len='1744' />
+    </fileobject>
+    <fileobject>
+      <filename>127.000.000.001.01234-127.000.000.001.53458</filename>
+      <filesize>99</filesize>
+      <tcpflow startime='2024-03-11T07:32:27.397730Z' endtime='2024-03-11T07:32:55.513426Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='1234' dstport='53458' packets='7' len='569' />
+    </fileobject>
+    <fileobject>
+      <filename>127.000.000.001.40346-127.000.000.001.01234</filename>
+      <filesize>10</filesize>
+      <tcpflow startime='2024-03-11T07:45:16.753973Z' endtime='2024-03-11T07:45:32.958492Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='40346' dstport='1234' packets='5' len='348' />
+    </fileobject>
+    <fileobject>
+      <filename>127.000.000.001.01234-127.000.000.001.42612</filename>
+      <filesize>158</filesize>
+      <tcpflow startime='2024-03-11T07:40:13.921820Z' endtime='2024-03-11T07:44:14.180638Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='1234' dstport='42612' packets='13' len='1024' />
+    </fileobject>
+    <fileobject>
+      <filename>127.000.000.001.42612-127.000.000.001.01234</filename>
+      <filesize>81</filesize>
+      <tcpflow startime='2024-03-11T07:40:13.921817Z' endtime='2024-03-11T07:44:14.180648Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='42612' dstport='1234' packets='15' len='1079' />
+    </fileobject>
+    <fileobject>
+      <filename>127.000.000.001.01234-127.000.000.001.51586</filename>
+      <filesize>397</filesize>
+      <tcpflow startime='2024-03-11T07:10:46.390399Z' endtime='2024-03-11T07:10:50.752035Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='1234' dstport='51586' packets='11' len='1131' />
+    </fileobject>
+    <fileobject>
+      <filename>127.000.000.001.01234-127.000.000.001.54728</filename>
+      <filesize>2435</filesize>
+      <tcpflow startime='2024-03-11T10:31:19.052238Z' endtime='2024-03-11T10:48:49.867795Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='1234' dstport='54728' packets='58' len='6271' />
+    </fileobject>
+    <fileobject>
+      <filename>127.000.000.001.01234-127.000.000.001.43872</filename>
+      <filesize>241808</filesize>
+      <tcpflow startime='2024-03-11T10:16:31.295253Z' endtime='2024-03-11T10:16:32.300455Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='1234' dstport='43872' packets='120115' len='8169406' />
+    </fileobject>
+    <fileobject>
+      <filesize>0</filesize>
+      <tcpflow startime='2024-03-11T07:44:50.623698Z' endtime='2024-03-11T07:44:50.623698Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='42710' dstport='1234' packets='1' len='74' />
+    </fileobject>
+    <fileobject>
+      <filename>127.000.000.001.35964-127.000.000.001.01234</filename>
+      <filesize>853</filesize>
+      <tcpflow startime='2024-03-11T10:31:13.628041Z' endtime='2024-03-11T10:48:49.867809Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='35964' dstport='1234' packets='79' len='6075' />
+    </fileobject>
+    <fileobject>
+      <filename>127.000.000.001.36200-127.000.000.001.01234</filename>
+      <filesize>75</filesize>
+      <tcpflow startime='2024-03-11T07:50:43.407674Z' endtime='2024-03-11T07:51:03.737860Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='36200' dstport='1234' packets='9' len='677' />
+    </fileobject>
+    <fileobject>
+      <filename>127.000.000.001.01234-127.000.000.001.35964</filename>
+      <filesize>2420</filesize>
+      <tcpflow startime='2024-03-11T10:31:13.628052Z' endtime='2024-03-11T10:48:49.867818Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='1234' dstport='35964' packets='56' len='6124' />
+    </fileobject>
+    <fileobject>
+      <filename>127.000.000.001.01234-127.000.000.001.36200</filename>
+      <filesize>99</filesize>
+      <tcpflow startime='2024-03-11T07:50:43.407678Z' endtime='2024-03-11T07:51:03.737832Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='1234' dstport='36200' packets='6' len='503' />
+    </fileobject>
+    <fileobject>
+      <filesize>0</filesize>
+      <tcpflow startime='2024-03-11T10:16:18.352186Z' endtime='2024-03-11T10:16:18.352186Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='38068' dstport='1234' packets='1' len='74' />
+    </fileobject>
+    <fileobject>
+      <filename>127.000.000.001.45616-127.000.000.001.01234</filename>
+      <filesize>132</filesize>
+      <tcpflow startime='2024-03-11T10:13:01.245405Z' endtime='2024-03-11T10:13:07.148181Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='45616' dstport='1234' packets='728772' len='48099092' />
+    </fileobject>
+    <fileobject>
+      <filename>127.000.000.001.53458-127.000.000.001.01234</filename>
+      <filesize>75</filesize>
+      <tcpflow startime='2024-03-11T07:32:27.397727Z' endtime='2024-03-11T07:32:55.513435Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='53458' dstport='1234' packets='9' len='677' />
+    </fileobject>
+    <fileobject>
+      <filename>127.000.000.001.01234-127.000.000.001.45616</filename>
+      <filesize>1507125</filesize>
+      <tcpflow startime='2024-03-11T10:13:01.245412Z' endtime='2024-03-11T10:13:07.148197Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='1234' dstport='45616' packets='728771' len='49606019' />
+    </fileobject>
+    <fileobject>
+      <filename>127.000.000.001.01234-127.000.000.001.58174</filename>
+      <filesize>794</filesize>
+      <tcpflow startime='2024-03-11T10:26:55.380503Z' endtime='2024-03-11T10:29:22.831182Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='1234' dstport='58174' packets='23' len='2320' />
+    </fileobject>
+    <fileobject>
+      <filesize>0</filesize>
+      <tcpflow startime='2024-03-11T10:18:01.550392Z' endtime='2024-03-11T10:18:01.550392Z' family='2' src_ipn='127.0.0.1' dst_ipn='127.0.0.1' srcport='48716' dstport='1234' packets='1' len='74' />
+    </fileobject>
+  </configuration>
+  <summary />
+  <open_fds_at_end>0</open_fds_at_end>
+  <max_open_flows>0</max_open_flows>
+  <total_flows>42</total_flows>
+  <flow_map_size>37</flow_map_size>
+  <total_packets>1698526</total_packets>
+  <rusage>
+    <utime>0.200491</utime>
+    <stime>1.299018</stime>
+    <maxrss>14016</maxrss>
+    <minflt>1319</minflt>
+    <majflt>0</majflt>
+    <nswap>0</nswap>
+    <inblock>0</inblock>
+    <oublock>80</oublock>
+    <clocktime>64207.507194</clocktime>
+  </rusage>
+</dfxml>
